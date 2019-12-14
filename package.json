@@ -31,5 +31,7 @@
     "math-toolbox": "^1.12.0",
     "three": "^0.111.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "kapla": "^2.1.3"
+  }
 }

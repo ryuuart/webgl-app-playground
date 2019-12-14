@@ -12,10 +12,10 @@ export default class extends component(Object3D) {
   init() {
     this.geometry = new BoxBufferGeometry(3, 3, 3, 18, 18, 18);
     this.material = new MagicShader({
-      wireframe: true,
+      wireframe: false,
       name: 'Cube',
       vertexShader: `
-        precision highp float;
+        precision mediump float;
         
         attribute vec3 normal;
         attribute vec3 position;
