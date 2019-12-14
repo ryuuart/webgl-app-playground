@@ -42,3 +42,5 @@ To help manage the interaction between DOM and JS without something heavy like j
 
 #### MutationObserver
 
+[MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) watches if anything changes in the DOM tree. It'll call a specified callback when a DOM change happens.
+
