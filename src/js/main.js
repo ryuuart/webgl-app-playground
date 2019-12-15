@@ -6,9 +6,11 @@ import { component } from 'bidello';
 import settings from './settings';
 import postfx from './postfx/postfx';
 import assets from './assets';
+import dom from './gl/dom';
 
 class Site extends component() {
   init() {
+    dom.register(document.querySelector("a"));
     assets.load();
     document.body.appendChild(renderer.domElement);
   }

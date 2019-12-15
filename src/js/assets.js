@@ -3,10 +3,10 @@ import bidello from 'bidello';
 import deferred from '/js/utils/deferred';
 
 const RESOURCES = [
-  {
-    name: 'photo',
-    url: require('/assets/photo.jpg')
-  },
+  // {
+  //   name: 'photo',
+  //   url: require('/assets/photo.jpg')
+  // },
 
   //  {
   //    name: 'photo',
