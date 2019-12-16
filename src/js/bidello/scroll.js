@@ -13,6 +13,7 @@ class Scroll {
         this.scrollObj = {};
         this.x = 0;
         this.y = 0;
+        this.ease = 0;
 
         this.onScroll = this.onScroll.bind(this);
 

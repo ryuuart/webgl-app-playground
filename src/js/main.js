@@ -18,8 +18,7 @@ class Site extends component() {
     app.register("trackable", trackable);
     
     assets.load();
-    document.getElementById("canvas-container").appendChild(renderer.domElement);
-    // document.body.appendChild(renderer.domElement);
+    document.body.appendChild(renderer.domElement);
   }
 
   onRaf() {

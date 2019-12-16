@@ -30,6 +30,7 @@ export default class extends component(Object3D) {
     this.camUnit = camera.calculateUnitSize(
       camera.position.z - this.position.z
     );
+    /*
       calculateUnitSize(distance = this.position.z) {
         const vFov = this.fov * Math.PI / 180;
         const height = 2 * Math.tan(vFov / 2) * distance;
@@ -39,6 +40,7 @@ export default class extends component(Object3D) {
           height
         };
       }
+    */
 
     // Set size
     const x = this.bounds.width / viewport.width;
@@ -55,8 +57,6 @@ export default class extends component(Object3D) {
   updatePosition(pos = scroll.y) {
     const y = pos;
 
-    // scroll.update();
-
     // Set origin to top left
     this.position.x = -(this.camUnit.width / 2) + this.scale.x / 2;
     this.position.y = this.camUnit.height / 2 - this.scale.y / 2;
@@ -68,6 +68,10 @@ export default class extends component(Object3D) {
   }
 
   onRaf() {
+    this.updatePosition();
+  }
+
+  onScroll() {
     this.updatePosition();
   }
 
