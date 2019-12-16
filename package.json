@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "gl": "^4.4.0",
-    "kapla": "^2.1.3"
+    "kapla": "^2.1.3",
+    "locomotive-scroll": "^3.2.6"
   }
 }

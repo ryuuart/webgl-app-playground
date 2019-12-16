@@ -40,7 +40,7 @@ import {
     }
   
     onRaf({ delta }) {
-      // super.onRaf();
+      super.onRaf();
   
       // this.material.uniforms.uTime.value += delta * 0.1;
     }

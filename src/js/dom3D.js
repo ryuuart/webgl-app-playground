@@ -23,14 +23,13 @@ export default class extends component(Object3D) {
     };
 
     this.updateSize();
-    // this.updatePosition();
+    this.updatePosition();
   }
 
   updateSize() {
     this.camUnit = camera.calculateUnitSize(
       camera.position.z - this.position.z
     );
-    /*
       calculateUnitSize(distance = this.position.z) {
         const vFov = this.fov * Math.PI / 180;
         const height = 2 * Math.tan(vFov / 2) * distance;
@@ -40,7 +39,6 @@ export default class extends component(Object3D) {
           height
         };
       }
-    */
 
     // Set size
     const x = this.bounds.width / viewport.width;
@@ -54,22 +52,24 @@ export default class extends component(Object3D) {
     this.scale.y = this.camUnit.height * y;
   }
 
-  // updatePosition(pos = scroll.y) {
-  //   const y = pos;
+  updatePosition(pos = scroll.y) {
+    const y = pos;
 
-  //   // Set origin to top left
-  //   this.position.x = -(this.camUnit.width / 2) + this.scale.x / 2;
-  //   this.position.y = this.camUnit.height / 2 - this.scale.y / 2;
+    // scroll.update();
 
-  //   // Set position
-  //   this.position.x += (this.bounds.left / viewport.width) * this.camUnit.width;
-  //   this.position.y -=
-  //     ((this.bounds.top - y) / viewport.height) * this.camUnit.height;
-  // }
+    // Set origin to top left
+    this.position.x = -(this.camUnit.width / 2) + this.scale.x / 2;
+    this.position.y = this.camUnit.height / 2 - this.scale.y / 2;
 
-  // onRaf() {
-  //   this.updatePosition(scroll.easeY);
-  // }
+    // Set position
+    this.position.x += (this.bounds.left / viewport.width) * this.camUnit.width;
+    this.position.y -=
+      ((this.bounds.top - y) / viewport.height) * this.camUnit.height;
+  }
+
+  onRaf() {
+    this.updatePosition();
+  }
 
   destroy() {
     this.parent && this.parent.remove(this);

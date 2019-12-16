@@ -6,13 +6,20 @@ import { component } from 'bidello';
 import settings from './settings';
 import postfx from './postfx/postfx';
 import assets from './assets';
-import dom from './gl/dom';
+import trackable from './trackable';
+
+import { Application } from 'kapla';
 
 class Site extends component() {
   init() {
-    dom.register(document.querySelector("a"));
+    // dom.register(document.querySelector("a"));
+
+    const app = Application.start();
+    app.register("trackable", trackable);
+    
     assets.load();
-    document.body.appendChild(renderer.domElement);
+    document.getElementById("canvas-container").appendChild(renderer.domElement);
+    // document.body.appendChild(renderer.domElement);
   }
 
   onRaf() {
