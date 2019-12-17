@@ -1,7 +1,9 @@
 import Button from "../components/button";
+import Image from "../components/image";
 
 const elements = {
-  button: Button
+  button: Button,
+  image: Image
 };
 
 class Dom {

@@ -26,6 +26,28 @@ npm run dev
 
 ## 📝 Notes
 
+### 12/17/2019
+
+#### Preload
+
+**Preload** is arguably one of the most important parts of getting a WebGL app done right. If the stuff isn't loaded and you attempt to work with that _uncreated_ stuff, you get infested with bugs you don't even know where. It's likely because something didn't load on time or it's just not ready yet. For now, there are 2 _very_ important things that must be loaded before doing _anything_. That's **scroll** for virtual scroll and positioning, and **Resources** for loading images, videos, and other things that should be downloaded beforehand.
+
+For virtual scroll, it's loaded on `window.load`, and for resources, it's loaded in `assets.js` with `resource-loader`.
+
+During load, it's a good idea to have a load screen.
+
+#### Virtual Scroll...
+
+There were so many issues that came when bringing in virtual scroll. The main benefit of virtual scroll (despite the accessiblity and usability risks) is that it synchronizes MUCH better with WebGL. It also allows certain effects like parallax, navigation, and any _eased_ scroll effects to be easy peasy. I opted to not go for my own implementation because there are so many layers of complexity to virtual scroll (`getBoundingClientRect()`, maintaining transforms for all DOM elements, parallax, etc.). Locomotive Scroll does all of this and more. 
+
+Also, for the positional sychronization issues, `scroll.update()` must be called before passing the relevant `scrollX` and `scrollY` values to the `scene` and `viewport`. 
+
+#### Common Patterns
+
+`deferred()` promises
+
+This is theoretically an Anti-Pattern for [some](https://medium.com/@7gravity/javascript-promise-anti-patterns-5dcdcf4bd2b6), but for its implementation in this project, `deferred` creates a new `promise`. This promise works like a normal promise, but you can access the `resolve()` and `reject()` methods to use later.
+
 ### 12/16/2019
 
 #### More on the libraries

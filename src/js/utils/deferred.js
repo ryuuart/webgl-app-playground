@@ -1,3 +1,4 @@
+// Create a promise, but store the resolve() and reject() for later usage
 export default () => {
   let _resolve = undefined;
   let _reject = undefined;

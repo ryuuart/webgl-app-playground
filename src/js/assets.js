@@ -2,11 +2,25 @@ import { Loader } from 'resource-loader';
 import bidello from 'bidello';
 import deferred from '/js/utils/deferred';
 
+import { scroll } from './bidello';
+
 const RESOURCES = [
-  // {
-  //   name: 'photo',
-  //   url: require('/assets/photo.jpg')
-  // },
+  {
+    name: 'photo',
+    url: require('/assets/photo.jpg')
+  },
+  {
+    name: 'Long Cutout',
+    url: require('/assets/Long Cutout.png')
+  },
+  {
+    name: 'edgy picture.jpg',
+    url: require('/assets/edgy picture.jpg')
+  },
+  {
+    name: 'john-fornander-lCpjpQx6jQQ-unsplash',
+    url: require('/assets/john-fornander-lCpjpQx6jQQ-unsplash.jpg')
+  }
 
   //  {
   //    name: 'photo',
@@ -25,6 +39,8 @@ assets.resources.photo.loading.then(res => {
 class Assets {
   constructor() {
     this.resources = {};
+    this.preloadDOM = document.querySelector(".preload");
+    this.preloadDOMText = document.querySelector(".preload__text");
 
     RESOURCES.forEach(entry => {
       this.resources[entry.name] = entry;
@@ -50,6 +66,9 @@ class Assets {
 
   onProgress(loader, meta) {
     bidello.trigger({ name: 'loadProgress' }, { progress: this.loader.progress });
+
+    this.preloadDOMText.textContent = this.loader.progress.toFixed(2);
+
     const res = this.resources[meta.name];
     res.meta = meta;
     res.loading.resolve(res);
@@ -57,6 +76,9 @@ class Assets {
 
   finish() {
     this.deferred.resolve();
+
+    this.preloadDOM.classList.add("preload__done");
+
     bidello.trigger({ name: 'loadEnd' }, { resources: this.resources });
   }
 }

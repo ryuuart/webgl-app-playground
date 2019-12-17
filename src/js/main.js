@@ -12,11 +12,9 @@ import { Application } from 'kapla';
 
 class Site extends component() {
   init() {
-    // dom.register(document.querySelector("a"));
+    this.app = Application.start();
+    this.app.register("trackable", trackable);
 
-    const app = Application.start();
-    app.register("trackable", trackable);
-    
     assets.load();
     document.body.appendChild(renderer.domElement);
   }

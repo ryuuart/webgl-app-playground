@@ -10,7 +10,7 @@ import trail from '/js/utils/trail';
 
 export default class extends component(Object3D) {
   init() {
-    this.geometry = new BoxBufferGeometry(3, 3, 3, 18, 18, 18);
+    this.geometry = new BoxBufferGeometry(6, 6, 6, 18, 18, 18);
     this.material = new MagicShader({
       wireframe: false,
       name: 'Cube',
@@ -66,6 +66,7 @@ export default class extends component(Object3D) {
     });
 
     this.mesh = new Mesh(this.geometry, this.material);
+    this.mesh.translateZ(-6);
 
     this.add(this.mesh);
   }

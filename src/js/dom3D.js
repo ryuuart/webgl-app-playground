@@ -71,10 +71,6 @@ export default class extends component(Object3D) {
     this.updatePosition();
   }
 
-  onScroll() {
-    this.updatePosition();
-  }
-
   destroy() {
     this.parent && this.parent.remove(this);
     this.visible = false;
