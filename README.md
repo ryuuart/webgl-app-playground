@@ -26,6 +26,47 @@ npm run dev
 
 ## 📝 Notes
 
+### 12/16/2019
+
+#### More on the libraries
+
+Both bidello and kapla have components and are laid out very similarly. These 2 libraries serve 2 completely different functions. For this project, we use a kapla component to manage the actual DOM element and a bidello component to manage the _global_ events associated with that component. 
+
+Kapla components manage DOM elements by having a lifecycle and registering components labeled with `data-component="componentName"`. In this project, we use Kapla to "querySelectAll()" components with `data-component="trackable"`. Then we "register" the component. The registration is really making a "WebGL Component" and associating meta-data with it.
+
+In `dom.js`, when we register a component, we register a DOM component and its WebGL counterpart. Based on the component type, different WebGL Components will draw. These WebGL components are Dom3D objects and bidello components. Bidello components are components that tap into the bidello event system. Bidello events can be localized or "triggered" (example: scroll) to update interactions across the site. 
+
+#### WebGL Components
+
+WebGL components are DOM elements converted to WebGL. Common things to do with WebGL components are assigning it states, events, and materials. `dom3D.js` contains the skeleton for what a WebGL component should be. WebGL components get dimensions and relevent info from its DOM counterparts, and are added into the WebGL scene through calculations from the DOM. For WebGL components, 2 vital things must happen: `resize` and `scroll` events.  Resize determines the shape and size of the WebGL component, even when the page dimensions changes. Scroll events let the webGL component sync its position on the page. Because many WebGL components extend from `dom3D`, we're able to create reusable and customizable webGL components. Each webGL component has an event system that can be extended and possibly its own materials and shaders. Because of all these properties, adding WebGL components are very easy and done without any harm to the DOM elements.
+
+
+#### Interesting Details on This Architecture
+
+##### How is the WebGL managed?
+
+The `trackable` Kapla component registers anything that should be a WebGL component. The `dom.js` creates a WebGL component through `three.js` and `bidello` to manage events inside this new component. The new component extends from a base `dom3D` object inside `dom3D.js`. The new extended component can implement its own materials and events to customize the individual interactions.
+
+`dom.js` is like a "controller" or "instance manager". `dom.js` is a controller that creates and destroys any WebGL component on the site. All the instance references are stored in `dom.js` which makes them easy and accessible to manipulate.
+
+##### The best part of this architecture
+
+Everything is a progressive enhancement happening mostly on the Javascript end of things. All of this complexity builds on top of the existing DOM. Because everything is built like a progressive enhancement, the size is super customizable and adaptive to change.
+
+#### Common Patterns
+
+`export default new Object()`
+
+This gives us something like a Singleton. Sometimes, we need things to share, but only one thing should exist. The thing we want to exist shouldn't be imported and instanced. We need to access and update information directly. This is the way to do that with ES6 exports.
+
+`elements["property"]()`
+
+In a JSON, you can access things like a map by using the `elements["property"]` notation. This is way more readable and flexible than numbers.
+
+The `gl` CSS classname
+
+By appending classes whenever certain objects are ready, you're able to sync design changes like hiding visibility more natively; more natively as in not relying on JavaScript to manage all the complexity.
+
 ### 12/14/2019
 
 #### Explaining the libraries...

@@ -6,7 +6,6 @@ import { scroll } from './bidello';
 export default class extends Component {
     init() {
       dom.register(this.$el);
-      console.log(this.$el);
 
       scroll.update();
     }
