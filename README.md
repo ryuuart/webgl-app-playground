@@ -28,13 +28,19 @@ npm run dev
 
 ### 12/17/2019
 
+#### Images
+
+`THREE.TextureLoader`
+
+This will give us a `sampler2D` in the fragment shader.
+
 #### Preload
 
 **Preload** is arguably one of the most important parts of getting a WebGL app done right. If the stuff isn't loaded and you attempt to work with that _uncreated_ stuff, you get infested with bugs you don't even know where. It's likely because something didn't load on time or it's just not ready yet. For now, there are 2 _very_ important things that must be loaded before doing _anything_. That's **scroll** for virtual scroll and positioning, and **Resources** for loading images, videos, and other things that should be downloaded beforehand.
 
 For virtual scroll, it's loaded on `window.load`, and for resources, it's loaded in `assets.js` with `resource-loader`.
 
-During load, it's a good idea to have a load screen.
+During load, it's a good idea to have a load screen. This is handled on the `onProgress` event "hook" in `assets.js`.
 
 #### Virtual Scroll...
 
