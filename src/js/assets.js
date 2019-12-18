@@ -2,7 +2,7 @@ import { Loader } from 'resource-loader';
 import bidello from 'bidello';
 import deferred from '/js/utils/deferred';
 
-import { scroll } from './bidello';
+import textures from '/js/gl/utils/textures';
 
 const RESOURCES = [
   {
@@ -14,7 +14,7 @@ const RESOURCES = [
     url: require('/assets/Long Cutout.png')
   },
   {
-    name: 'edgy picture.jpg',
+    name: 'edgy picture',
     url: require('/assets/edgy picture.jpg')
   },
   {

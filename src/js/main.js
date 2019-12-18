@@ -13,18 +13,20 @@ import { Application } from 'kapla';
 class Site extends component() {
   init() {
     this.app = Application.start();
-    this.app.register("trackable", trackable);
 
     assets.load();
+
     document.body.appendChild(renderer.domElement);
   }
-
+  
   onRaf() {
     // renderer.render(scene, camera);
     postfx.render(scene, camera);
   }
-
+  
   onLoadEnd() {
+    this.app.register("trackable", trackable);
+    
     console.log('finished loader!');
   }
 }
