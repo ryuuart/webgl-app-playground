@@ -26,7 +26,7 @@ import {
       this.material.uniforms = {
         uTime: { value: 0 },
         uProgress: { value: 0 },
-        uImage: { value: textures.loadTextureFromAsset("edgy picture")}
+        uImage: { value: textures.loadTextureFromAsset(this.element.getAttribute("data-label"))}
         // uWind: { value: textures.fromAsset('wind') },
         // uShow: { value: 0 },
         // uClipping: { value: 1.0 }

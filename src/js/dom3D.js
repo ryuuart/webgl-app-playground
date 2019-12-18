@@ -27,6 +27,8 @@ export default class extends component(Object3D) {
   }
 
   updateSize() {
+    scroll.update();
+
     this.camUnit = camera.calculateUnitSize(
       camera.position.z - this.position.z
     );
@@ -68,6 +70,11 @@ export default class extends component(Object3D) {
   }
 
   onRaf() {
+    this.updatePosition();
+  }
+
+
+  onScroll() {
     this.updatePosition();
   }
 

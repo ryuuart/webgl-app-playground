@@ -17,10 +17,14 @@ class Scroll {
         this.x = 0;
         this.y = 0;
         this.ease = 0;
-     
+
         this.onScroll = this.onScroll.bind(this);
 
         this.scroll.on("scroll", this.onScroll);
+    }
+
+    update() {
+        this.scroll.update();
     }
 
     onScroll({ scroll }) {
