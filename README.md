@@ -26,6 +26,12 @@ npm run dev
 
 ## 📝 Notes
 
+### 12/18/2019
+
+#### TextureLoader
+
+Unlike a `THREE.TextureLoader`, I attempted to make `textures.js`, a wrapper on top of `THREE.TextureLoader`. I use this wrapper to connect `THREE.TextureLoader` and `assets.js`. Idea is to integrate the `TextureLoader` more integrated into the pipelines.
+
 ### 12/17/2019
 
 #### Images
