@@ -32,7 +32,9 @@
     "three": "^0.111.0"
   },
   "dependencies": {
+    "@barba/core": "^2.9.6",
     "gl": "^4.4.0",
+    "gsap": "^3.0.4",
     "kapla": "^2.1.3",
     "locomotive-scroll": "^3.2.6"
   }
