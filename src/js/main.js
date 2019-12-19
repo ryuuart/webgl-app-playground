@@ -20,8 +20,8 @@ class Site extends component() {
   }
   
   onRaf() {
-    // renderer.render(scene, camera);
-    postfx.render(scene, camera);
+    renderer.render(scene, camera);
+    // postfx.render(scene, camera);
   }
   
   onLoadEnd() {
