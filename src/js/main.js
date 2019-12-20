@@ -6,9 +6,11 @@ import { component } from 'bidello';
 import settings from './settings';
 import postfx from './postfx/postfx';
 import assets from './assets';
-import trackable from './trackable';
+import trackable from './kapla/Trackable';
 
 import { Application } from 'kapla';
+
+import TransitionManager from './transitionManager';
 
 class Site extends component() {
   init() {
@@ -23,10 +25,11 @@ class Site extends component() {
     renderer.render(scene, camera);
     // postfx.render(scene, camera);
   }
-  
+
   onLoadEnd() {
     this.app.register("trackable", trackable);
-    
+    this.transitionManager = new TransitionManager();
+
     console.log('finished loader!');
   }
 }

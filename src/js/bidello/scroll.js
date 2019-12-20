@@ -2,12 +2,12 @@ import LocomotiveScroll from 'locomotive-scroll';
 
 import bidello from 'bidello';
 
-class Scroll {
+export class Scroll {
     constructor() {
-        const scrollContainer = document.getElementById("js-scroll");
+        this.scrollContainer = document.getElementById("js-scroll");
 
         this.scroll = new LocomotiveScroll({
-            el: scrollContainer,
+            el: this.scrollContainer,
             smooth: true,
             inertia: 0.5,
             smoothMobile: true,
@@ -21,6 +21,35 @@ class Scroll {
         this.onScroll = this.onScroll.bind(this);
 
         this.scroll.on("scroll", this.onScroll);
+    }
+
+    destroy() {
+        this.scroll.destroy();
+    }
+
+    init() {
+        this.scroll.destroy();
+        
+        this.scrollContainer = document.getElementById("js-scroll");
+
+        this.scroll = new LocomotiveScroll({
+            el: this.scrollContainer,
+            smooth: true,
+            inertia: 0.5,
+            smoothMobile: true,
+        });
+
+        this.scrollObj = {};
+        this.x = 0;
+        this.y = 0;
+        this.ease = 0;
+
+        this.scroll.on("scroll", this.onScroll);
+
+        bidello.trigger({ name: "scroll" }, {
+            x: this.x,
+            y: this.y,
+        })
     }
 
     update() {

@@ -1,228 +1,277 @@
 <html>
-  <head>
-    <title>antipasto</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-      * {
-        box-sizing: border-box;
-      }
 
-      html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
+<head>
+  <title>antipasto</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        overflow: hidden;
-      }
+    html,
+    body {
+      margin: 0;
+      padding: 0;
 
-      body, main {
-        position: relative;
-      }
+      overflow: hidden;
+    }
 
-      canvas {
-        position: fixed;
+    body {
+      height: 100%;
+    }
 
-        width: 100vw;
-        height: 100vh;
+    body,
+    main {
+      position: relative;
+    }
 
-        top: 0;
-        left: 0;
+    canvas {
+      position: fixed;
 
-        z-index: -1;
-      }
+      width: 100vw;
+      height: 100vh;
 
-      h1, p {
-        font-family: sans-serif;
+      top: 0;
+      left: 0;
 
-        color: white;
+      z-index: -1;
+    }
 
-        line-height: 1.5;
-      }
+    h1,
+    p {
+      font-family: sans-serif;
 
-      h1 {
-        font-size: 4rem;
+      color: white;
 
-        margin: 0;
-        margin-bottom: 1.5rem;
-      }
+      line-height: 1.5;
+    }
 
-      a {
-        text-decoration: none;
+    h1 {
+      font-size: 4rem;
 
-        color: blue;
+      margin: 0;
+      margin-bottom: 1.5rem;
+    }
 
-        font-family: sans-serif;
-        font-weight: bold;
-        font-size: 1.5rem;
-      }
+    a {
+      text-decoration: none;
 
-      [data-type="button"] {
-        display: inline-block;
+      color: blue;
 
-        padding: 0.75rem 1rem;
-        margin-right: 0.5rem;
-      }
+      font-family: sans-serif;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
 
-      .block {
-        height: 200vh;
-      }
+    [data-type="button"] {
+      display: inline-block;
 
-      .text {
-        margin: 3rem auto;
+      padding: 0.75rem 1rem;
+      margin-right: 0.5rem;
+    }
 
-        width: 75%;
-      }
+    .block {
+      height: 200vh;
+    }
 
-      .gl {
-        background: transparent;
-      }
+    .text {
+      margin: 3rem auto;
 
-      #js-scroll {
-        /* height: 100%; */
-        width: 100vw;
-        position: relative;
-        z-index: 15;
+      width: 75%;
+    }
 
-        overflow: hidden;
-      }
+    .gl {
+      background: transparent;
+    }
 
-      section {
-        overflow: hidden;
-      }
+    #js-scroll {
+      width: 100vw;
+      position: relative;
+      z-index: 15;
 
-      .c-scrollbar {
-        width: 10px;
-        position: absolute;
-        right: 0;
-        top: 0;
-        height: 100vh;
-        transform-origin: center right;
-        transform: scaleX(1);
-        transition: transform 0.2s linear;
+      overflow: hidden;
+    }
 
-        color: white;
+    section {
+      overflow: hidden;
+    }
 
-        z-index: 20;
+    .c-scrollbar {
+      width: 10px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100vh;
+      transform-origin: center right;
+      transform: scaleX(1);
+      transition: transform 0.2s linear;
 
-        opacity: 1;
-      }
+      color: white;
 
-      .c-scrollbar:hover {
-        transform: scaleX(1.2);
-      }
+      z-index: 20;
 
-      .c-scrollbar_thumb {
-        color: white;
-        background: white;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
+      opacity: 1;
+    }
 
-        opacity: 0.25;
-      }
+    .c-scrollbar:hover {
+      transform: scaleX(1.2);
+    }
 
-      .preload {
-        position: fixed;
-        height: 100vh;
-        width: 100vw;
+    .c-scrollbar_thumb {
+      color: white;
+      background: white;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
+      opacity: 0.25;
+    }
 
-        z-index: 999;
+    .preload {
+      position: fixed;
+      height: 100vh;
+      width: 100vw;
 
-        background: black;
-        color: white;
-      }
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-      .preload__text {
-        font-family: sans-serif;
-        font-weight: 900;
-        font-size: 25rem;
+      z-index: 999;
 
-      }
+      background: black;
+      color: white;
+    }
 
-      .preload__done {
-        display: none;
-      }
+    .preload__text {
+      font-family: sans-serif;
+      font-weight: 900;
+      font-size: 25rem;
 
-      img {
-        margin: 3rem 0;
+    }
 
-        max-width: 50%;
-      }
+    .preload__done {
+      display: none;
+    }
 
-      img.gl {
-        visibility: hidden;
-      }
+    img {
+      margin: 3rem 0;
 
-      .text {
-        margin-bottom: 6rem;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="preload"><span class="preload__text">0</span></div>
-    <main id="js-scroll">
-        <section data-scroll-section>
-          <article>
-            <nav class="text">
-              <a href="./blog.html" data-component="trackable" data-type="button"><span>BLOG</span></a>
-            </nav>
-            <article class="text" data-scroll-target="top">
-              <h1>Hello World People</h1>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, exercitationem autem cumque libero aliquam laboriosam quia veritatis eveniet, animi similique et optio expedita. A beatae nihil tempora cum hic eum iusto explicabo non, aliquid animi nobis nemo error quae quia saepe dignissimos earum eveniet perspiciatis tenetur quidem repellat? Sequi ratione ad sunt ullam facilis fugit atque. Quidem, incidunt rem? Odio, animi cumque rem, saepe facere harum cum, nostrum aut veniam corporis eos? Possimus asperiores sint minus corporis beatae cumque adipisci iste illum autem fuga incidunt cupiditate enim soluta deserunt vitae vel impedit, quisquam consequatur magni? Maiores officiis inventore sapiente recusandae.</p>
-              <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
-              <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
-              <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
-            </article>
-            <article class="text">
-              <h1>Hello World People</h1>
-              <p data-component="trackable" data-type="button" style="color: black; padding:4rem;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, exercitationem autem cumque libero aliquam laboriosam quia veritatis eveniet, animi similique et optio expedita. A beatae nihil tempora cum hic eum iusto explicabo non, aliquid animi nobis nemo error quae quia saepe dignissimos earum eveniet perspiciatis tenetur quidem repellat? Sequi ratione ad sunt ullam facilis fugit atque. Quidem, incidunt rem? Odio, animi cumque rem, saepe facere harum cum, nostrum aut veniam corporis eos? Possimus asperiores sint minus corporis beatae cumque adipisci iste illum autem fuga incidunt cupiditate enim soluta deserunt vitae vel impedit, quisquam consequatur magni? Maiores officiis inventore sapiente recusandae.</p>
-              <img src="./assets/edgy picture.jpg" alt="Edgy Picture" data-component="trackable" data-type="image" data-label="edgy picture">
-              <div>
-                <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
-              <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
-              <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
-              </div>
-            </article>
-            <article class="text">
-              <h1>Hello World People</h1>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, exercitationem autem cumque libero aliquam laboriosam quia veritatis eveniet, animi similique et optio expedita. A beatae nihil tempora cum hic eum iusto explicabo non, aliquid animi nobis nemo error quae quia saepe dignissimos earum eveniet perspiciatis tenetur quidem repellat? Sequi ratione ad sunt ullam facilis fugit atque. Quidem, incidunt rem? Odio, animi cumque rem, saepe facere harum cum, nostrum aut veniam corporis eos? Possimus asperiores sint minus corporis beatae cumque adipisci iste illum autem fuga incidunt cupiditate enim soluta deserunt vitae vel impedit, quisquam consequatur magni? Maiores officiis inventore sapiente recusandae.</p>
-              <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
-              <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
-              <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
-            </article>
-            <article class="text">
-              <h1>Hello World People</h1>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, exercitationem autem cumque libero aliquam laboriosam quia veritatis eveniet, animi similique et optio expedita. A beatae nihil tempora cum hic eum iusto explicabo non, aliquid animi nobis nemo error quae quia saepe dignissimos earum eveniet perspiciatis tenetur quidem repellat? Sequi ratione ad sunt ullam facilis fugit atque. Quidem, incidunt rem? Odio, animi cumque rem, saepe facere harum cum, nostrum aut veniam corporis eos? Possimus asperiores sint minus corporis beatae cumque adipisci iste illum autem fuga incidunt cupiditate enim soluta deserunt vitae vel impedit, quisquam consequatur magni? Maiores officiis inventore sapiente recusandae.</p>
-              <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
-              <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
-              <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
-            </article>
-            <article class="text">
-              <h1>Hello World People</h1>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, exercitationem autem cumque libero aliquam laboriosam quia veritatis eveniet, animi similique et optio expedita. A beatae nihil tempora cum hic eum iusto explicabo non, aliquid animi nobis nemo error quae quia saepe dignissimos earum eveniet perspiciatis tenetur quidem repellat? Sequi ratione ad sunt ullam facilis fugit atque. Quidem, incidunt rem? Odio, animi cumque rem, saepe facere harum cum, nostrum aut veniam corporis eos? Possimus asperiores sint minus corporis beatae cumque adipisci iste illum autem fuga incidunt cupiditate enim soluta deserunt vitae vel impedit, quisquam consequatur magni? Maiores officiis inventore sapiente recusandae.</p>
-              <img src="./assets/photo.jpg" alt="Luigi De Rosa" data-component="trackable" data-type="image" data-label="photo">
-              <div>
-                <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
-                <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
-                <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
-              </div>
-            </article>
-            <article class="text" data-scroll-target="bot">
-              <h1 data-component="trackable" data-type="button" style="color: black; padding: 4rem;">Hello World People</h1>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, exercitationem autem cumque libero aliquam laboriosam quia veritatis eveniet, animi similique et optio expedita. A beatae nihil tempora cum hic eum iusto explicabo non, aliquid animi nobis nemo error quae quia saepe dignissimos earum eveniet perspiciatis tenetur quidem repellat? Sequi ratione ad sunt ullam facilis fugit atque. Quidem, incidunt rem? Odio, animi cumque rem, saepe facere harum cum, nostrum aut veniam corporis eos? Possimus asperiores sint minus corporis beatae cumque adipisci iste illum autem fuga incidunt cupiditate enim soluta deserunt vitae vel impedit, quisquam consequatur magni? Maiores officiis inventore sapiente recusandae.</p>
-              <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
-              <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
-              <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
-            </article>
-          </article>
-        </section>
-    </main>
-    
-    <script src="js/main.js"></script>
-  </body>
+      max-width: 50%;
+    }
+
+    img.gl {
+      visibility: hidden;
+    }
+
+    .text {
+      margin-bottom: 6rem;
+    }
+
+    main {
+      min-height: 100vh;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="preload"><span class="preload__text">0</span></div>
+  <main id="js-scroll" data-barba="wrapper">
+    <section data-barba="container" data-barba-namespace="home">
+      <nav class="text">
+          <a href="./blog.html" data-component="trackable" data-type="button"><span>BLOG</span></a>
+        </nav>
+        <article class="text" data-scroll-target="top">
+          <h1>Hello World People</h1>
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, exercitationem autem cumque libero aliquam
+            laboriosam quia veritatis eveniet, animi similique et optio expedita. A beatae nihil tempora cum hic eum
+            iusto explicabo non, aliquid animi nobis nemo error quae quia saepe dignissimos earum eveniet perspiciatis
+            tenetur quidem repellat? Sequi ratione ad sunt ullam facilis fugit atque. Quidem, incidunt rem? Odio, animi
+            cumque rem, saepe facere harum cum, nostrum aut veniam corporis eos? Possimus asperiores sint minus corporis
+            beatae cumque adipisci iste illum autem fuga incidunt cupiditate enim soluta deserunt vitae vel impedit,
+            quisquam consequatur magni? Maiores officiis inventore sapiente recusandae.</p>
+          <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
+          <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
+          <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
+        </article>
+        <article class="text">
+          <h1>Hello World People</h1>
+          <p data-component="trackable" data-type="button" style="color: black; padding:4rem;">Lorem ipsum dolor sit,
+            amet consectetur adipisicing elit. Sequi, exercitationem autem cumque libero aliquam laboriosam quia
+            veritatis eveniet, animi similique et optio expedita. A beatae nihil tempora cum hic eum iusto explicabo
+            non, aliquid animi nobis nemo error quae quia saepe dignissimos earum eveniet perspiciatis tenetur quidem
+            repellat? Sequi ratione ad sunt ullam facilis fugit atque. Quidem, incidunt rem? Odio, animi cumque rem,
+            saepe facere harum cum, nostrum aut veniam corporis eos? Possimus asperiores sint minus corporis beatae
+            cumque adipisci iste illum autem fuga incidunt cupiditate enim soluta deserunt vitae vel impedit, quisquam
+            consequatur magni? Maiores officiis inventore sapiente recusandae.</p>
+          <img src="./assets/edgy picture.jpg" alt="Edgy Picture" data-component="trackable" data-type="image"
+            data-label="edgy picture">
+          <div>
+            <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
+            <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
+            <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
+          </div>
+        </article>
+        <article class="text">
+          <h1>Hello World People</h1>
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, exercitationem autem cumque libero aliquam
+            laboriosam quia veritatis eveniet, animi similique et optio expedita. A beatae nihil tempora cum hic eum
+            iusto explicabo non, aliquid animi nobis nemo error quae quia saepe dignissimos earum eveniet perspiciatis
+            tenetur quidem repellat? Sequi ratione ad sunt ullam facilis fugit atque. Quidem, incidunt rem? Odio, animi
+            cumque rem, saepe facere harum cum, nostrum aut veniam corporis eos? Possimus asperiores sint minus corporis
+            beatae cumque adipisci iste illum autem fuga incidunt cupiditate enim soluta deserunt vitae vel impedit,
+            quisquam consequatur magni? Maiores officiis inventore sapiente recusandae.</p>
+          <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
+          <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
+          <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
+        </article>
+        <article class="text">
+          <h1>Hello World People</h1>
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, exercitationem autem cumque libero aliquam
+            laboriosam quia veritatis eveniet, animi similique et optio expedita. A beatae nihil tempora cum hic eum
+            iusto explicabo non, aliquid animi nobis nemo error quae quia saepe dignissimos earum eveniet perspiciatis
+            tenetur quidem repellat? Sequi ratione ad sunt ullam facilis fugit atque. Quidem, incidunt rem? Odio, animi
+            cumque rem, saepe facere harum cum, nostrum aut veniam corporis eos? Possimus asperiores sint minus corporis
+            beatae cumque adipisci iste illum autem fuga incidunt cupiditate enim soluta deserunt vitae vel impedit,
+            quisquam consequatur magni? Maiores officiis inventore sapiente recusandae.</p>
+          <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
+          <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
+          <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
+        </article>
+        <article class="text">
+          <h1>Hello World People</h1>
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, exercitationem autem cumque libero aliquam
+            laboriosam quia veritatis eveniet, animi similique et optio expedita. A beatae nihil tempora cum hic eum
+            iusto explicabo non, aliquid animi nobis nemo error quae quia saepe dignissimos earum eveniet perspiciatis
+            tenetur quidem repellat? Sequi ratione ad sunt ullam facilis fugit atque. Quidem, incidunt rem? Odio, animi
+            cumque rem, saepe facere harum cum, nostrum aut veniam corporis eos? Possimus asperiores sint minus corporis
+            beatae cumque adipisci iste illum autem fuga incidunt cupiditate enim soluta deserunt vitae vel impedit,
+            quisquam consequatur magni? Maiores officiis inventore sapiente recusandae.</p>
+          <img src="./assets/photo.jpg" alt="Luigi De Rosa" data-component="trackable" data-type="image"
+            data-label="photo">
+          <div>
+            <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
+            <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
+            <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
+          </div>
+        </article>
+        <article class="text" data-scroll-target="bot">
+          <h1 data-component="trackable" data-type="button" style="color: black; padding: 4rem;">Hello World People</h1>
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, exercitationem autem cumque libero aliquam
+            laboriosam quia veritatis eveniet, animi similique et optio expedita. A beatae nihil tempora cum hic eum
+            iusto explicabo non, aliquid animi nobis nemo error quae quia saepe dignissimos earum eveniet perspiciatis
+            tenetur quidem repellat? Sequi ratione ad sunt ullam facilis fugit atque. Quidem, incidunt rem? Odio, animi
+            cumque rem, saepe facere harum cum, nostrum aut veniam corporis eos? Possimus asperiores sint minus corporis
+            beatae cumque adipisci iste illum autem fuga incidunt cupiditate enim soluta deserunt vitae vel impedit,
+            quisquam consequatur magni? Maiores officiis inventore sapiente recusandae.</p>
+          <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
+          <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
+          <a href="https://google.com" data-component="trackable" data-type="button"><span>GOOGLE</span></a>
+        </article>
+    </section>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+
 </html>

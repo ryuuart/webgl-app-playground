@@ -9,6 +9,7 @@ export default class extends component(Object3D) {
   }
 
   onResize() {
+    console.log("resized")
     if (!this.element) {
       return;
     }
@@ -22,13 +23,12 @@ export default class extends component(Object3D) {
       height: rect.height
     };
 
+
     this.updateSize();
     this.updatePosition();
   }
 
   updateSize() {
-    scroll.update();
-
     this.camUnit = camera.calculateUnitSize(
       camera.position.z - this.position.z
     );
