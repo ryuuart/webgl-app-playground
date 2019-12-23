@@ -28,7 +28,7 @@ import {
       this.material.uniforms = {
         uTime: { value: 0 },
         uProgress: { value: 0 },
-        uImage: { value: textures.loadTextureFromAsset(this.element.getAttribute("data-label"))},
+        uImage: { value: textures.textures[this.element.getAttribute("data-label")]},
         uRes: { value: new Vector2(viewport.width, viewport.height) },
         uImageRes: { value: new Vector2(this.element.width, this.element.height)}
         // uWind: { value: textures.fromAsset('wind') },

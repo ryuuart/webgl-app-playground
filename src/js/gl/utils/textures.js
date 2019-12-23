@@ -10,8 +10,11 @@ class Textures {
         this.loader = new TextureLoader();
     }
 
-    loadTexture({ name, url }) {
-        this.textures[name] = this.loader.load(url);
+    loadTexture({ name, url, resource }) {
+        if (resource) {
+            this.textures[resource.name] = this.loader.load(resource.url);
+        } else 
+            this.textures[name] = this.loader.load(url);
     }
 
     loadTextureFromAsset(name) {

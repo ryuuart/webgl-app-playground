@@ -59,9 +59,16 @@ class Assets {
     });
 
     this.loader.onProgress.add(this.onProgress.bind(this));
+    this.loader.use(this.use.bind(this));
     this.loader.load(this.finish.bind(this));
 
     return deferred;
+  }
+
+  use(resource, next) {
+    textures.loadTexture({ resource });
+
+    next();
   }
 
   onProgress(loader, meta) {
