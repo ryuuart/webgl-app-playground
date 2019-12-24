@@ -28,6 +28,8 @@ export default {
         }
 
         gsap.fromTo(container, 0.5, { autoAlpha: 1 }, { autoAlpha: 0 }).then(() => {
+            document.dispatchEvent(new Event("scroll"))
+            window.dispatchEvent(new Event("resize"))
             this.async();
         });
     },
@@ -39,7 +41,7 @@ export default {
         for (const gl in dom.instances) {
             const uniforms = dom.instances[gl].material.uniforms;
 
-            gsap.to(uniforms,uProgress, 0.5, { value: 0 });
+            gsap.to(uniforms.uProgress, 0.5, { value: 0 });
             console.log(uniforms.uProgress)
         }
 

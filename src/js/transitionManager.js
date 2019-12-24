@@ -24,8 +24,6 @@ class TransitionManager extends component() {
         })
 
         barba.hooks.after((data) => {
-            document.dispatchEvent(new Event("scroll"))
-            window.dispatchEvent(new Event("resize"))
             scroll.init();
         });
 
