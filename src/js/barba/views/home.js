@@ -8,7 +8,7 @@ export const home = {
     beforeLeave(data) {
         scroll.destroy();
     },
-    afterEnter(data) {
+    beforeEnter(data) {
         console.log(data)
         scroll.init();
     },

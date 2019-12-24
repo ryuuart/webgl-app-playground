@@ -15,13 +15,18 @@ class TransitionManager extends component() {
         barba.use(barbaPrefetch);
         
         this.barba = barba.init({
-            preventRunning: true,
+            debug: true,
             transitions: [defaultTransition],
-            views: [home, blog]
+        })
+
+        barba.hooks.before(() => {
+            scroll.destroy();
         })
 
         barba.hooks.after((data) => {
-            bidello.trigger({ name: "TransitionAfter" })
+            document.dispatchEvent(new Event("scroll"))
+            window.dispatchEvent(new Event("resize"))
+            scroll.init();
         });
 
         console.log("Transition Manager loaded");

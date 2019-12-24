@@ -8,7 +8,7 @@ export const blog = {
     beforeLeave(data) {
         scroll.destroy();
     },
-    afterEnter(data) {
+    beforeEnter(data) {
         scroll.init();
     }
 }

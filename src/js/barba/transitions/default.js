@@ -4,11 +4,10 @@ import { scroll, raf } from '../../bidello';
 
 import renderer from '../../renderer';
 import scene from '../../scene';
+import dom from '../../gl/dom';
 
 export default {
     name: 'default-transition',
-
-    sync: false,
 
     // from: {
     //     namespace: [],
@@ -21,17 +20,31 @@ export default {
 
         console.log(namespace);
 
-        gsap.fromTo(container, 1, { opacity: 1 }, { opacity: 0, onComplete: () => {
-        }});
+        for (const gl in dom.instances) {
+            const uniforms = dom.instances[gl].material.uniforms;
+
+            gsap.to(uniforms.uProgress, 0.5, { value: 1 });
+            console.log(uniforms.uProgress)
+        }
+
+        gsap.fromTo(container, 0.5, { autoAlpha: 1 }, { autoAlpha: 0 }).then(() => {
+            this.async();
+        });
     },
     enter({ next }) {
         const { container, namespace } = next;
         
         console.log(namespace)
 
-        gsap.fromTo(container, 1, { opacity: 0 }, { opacity: 1, onComplete: () => {
-            document.dispatchEvent(new Event("scroll"))
-            window.dispatchEvent(new Event("resize"))
-        }});
+        for (const gl in dom.instances) {
+            const uniforms = dom.instances[gl].material.uniforms;
+
+            gsap.to(uniforms,uProgress, 0.5, { value: 0 });
+            console.log(uniforms.uProgress)
+        }
+
+        gsap.fromTo(container, 0.5, { autoAlpha: 0 }, { autoAlpha: 1 }).then(() => {
+            this.async();
+        });
     },
 };

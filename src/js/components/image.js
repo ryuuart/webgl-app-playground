@@ -27,8 +27,6 @@ import {
 
       const texture = textures.getTexture([this.element.getAttribute("data-label")]);
 
-      console.log(textures.textures[this.element.getAttribute("data-label")])
-
       this.material.uniforms = {
         uTime: { value: 0 },
         uProgress: { value: 0 },

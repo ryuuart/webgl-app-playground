@@ -66,7 +66,6 @@ class Assets {
   }
 
   use(resource, next) {
-    console.log(resource)
     textures.loadTexture({ resource }, next);
   }
 

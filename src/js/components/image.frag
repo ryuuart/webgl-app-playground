@@ -4,6 +4,7 @@ uniform sampler2D uImage;
 
 uniform vec2 uRes;
 uniform vec2 uImageRes;
+uniform float uProgress;
 
 uniform float uTime;
 
@@ -28,6 +29,6 @@ void main() {
         texture2D(uImage, vec2(textureCoord.x, textureCoord.y + 0.025 * cos(uTime * 50.))).r, 
         texture2D(uImage, vec2(textureCoord.x, textureCoord.y + 0.010 * cos(uTime * 50.))).g, 
         texture2D(uImage, textureCoord).b, 
-        texture2D(uImage, textureCoord).a
+        texture2D(uImage, textureCoord).a - uProgress
     );
 }

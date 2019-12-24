@@ -81,11 +81,6 @@ export default class extends component(Object3D) {
     this.updatePosition();
   }
 
-  onTransitionAfter() {
-    document.dispatchEvent(new Event("scroll"))
-    window.dispatchEvent(new Event("resize"))
-  }
-
   destroy() {
     this.parent && this.parent.remove(this);
     this.visible = false;

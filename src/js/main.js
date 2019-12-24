@@ -24,10 +24,6 @@ class Site extends component() {
     // postfx.render(scene, camera);
   }
 
-  onTransitionAFter() {
-    this.app.unload("trackable");
-  }
-
   onLoadEnd() {
     this.app = Application.start();
     this.app.register("trackable", trackable);
