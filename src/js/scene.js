@@ -6,7 +6,7 @@ import camera from './camera';
 
 class Stage extends component(Scene) {
   init() {
-    this.add(new Cube());
+    // this.add(new Cube());
     this.add(camera);
   }
 }

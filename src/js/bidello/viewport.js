@@ -25,6 +25,8 @@ class Viewport {
     this.height = this.calculateHeight();
     this.ratio = this.width / this.height;
 
+    console.log("onResized called");
+
     bidello.trigger({ name: 'resize', fireAtStart: true }, {
       width: this.width,
       height: this.height,

@@ -3,10 +3,9 @@ import dom from '../gl/dom';
 
 export default class extends Component {
     init() {
-      console.log('tracked');
       dom.register(this.$el);
     }
-  
+
     destroy() {
       dom.unregister(this.$el);
     }

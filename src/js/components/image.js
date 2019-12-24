@@ -15,7 +15,7 @@ import {
   const material = new RawShaderMaterial({
     transparent: true,
     fragmentShader: require('./image.frag'),
-    vertexShader: require('./button.vert'),
+    vertexShader: require('./image.vert'),
   });
 
   export default class extends dom3D {
@@ -25,10 +25,14 @@ import {
       this.geometry = geometry;
       this.material = material.clone();
 
+      const texture = textures.getTexture([this.element.getAttribute("data-label")]);
+
+      console.log(textures.textures[this.element.getAttribute("data-label")])
+
       this.material.uniforms = {
         uTime: { value: 0 },
         uProgress: { value: 0 },
-        uImage: { value: textures.textures[this.element.getAttribute("data-label")]},
+        uImage: { value: texture },
         uRes: { value: new Vector2(viewport.width, viewport.height) },
         uImageRes: { value: new Vector2(this.element.width, this.element.height)}
         // uWind: { value: textures.fromAsset('wind') },

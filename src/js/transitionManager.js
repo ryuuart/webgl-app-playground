@@ -1,4 +1,5 @@
 import barba from '@barba/core';
+import barbaPrefetch from '@barba/prefetch';
 import site from './main';
 import { scroll, viewport, raf } from './bidello';
 import bidello, { component } from 'bidello';
@@ -7,32 +8,21 @@ import trackable from './kapla/Trackable';
 
 import defaultTransition from './barba/transitions/default';
 
+import { home, blog } from './barba/views';
+
 class TransitionManager extends component() {
     init() {
+        barba.use(barbaPrefetch);
+        
         this.barba = barba.init({
             preventRunning: true,
-            transitions: [defaultTransition]
+            transitions: [defaultTransition],
+            views: [home, blog]
         })
 
-        barba.hooks.before(
-            ({ current, next, trigger }) => {
-                console.log("barba hook leave")
-                scroll.destroy();
-                
-            }
-        )
-
-        barba.hooks.after(
-            ({ current, next, trigger }) => {
-                console.log("barba hook after enter")
-                
-                raf.onTick(raf.time);
-                viewport.onResize();
-                
-                scroll.init();
-                scroll.onScroll();
-            }
-        )
+        barba.hooks.after((data) => {
+            bidello.trigger({ name: "TransitionAfter" })
+        });
 
         console.log("Transition Manager loaded");
     }

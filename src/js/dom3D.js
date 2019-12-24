@@ -1,4 +1,4 @@
-import { Object3D } from "three";
+import { Object3D, sRGBEncoding } from "three";
 import { component } from "bidello";
 import { viewport, scroll } from "./bidello";
 import camera from "./camera";
@@ -9,20 +9,24 @@ export default class extends component(Object3D) {
   }
 
   onResize() {
-    console.log("resized")
     if (!this.element) {
       return;
     }
 
+    scroll.update();
     const rect = this.element.getBoundingClientRect();
 
     this.bounds = {
-      left: rect.left,
-      top: rect.top,
+      left: rect.left + scroll.x,
+      top: rect.top + scroll.y,
       width: rect.width,
       height: rect.height
     };
 
+    // console.log(this.bounds);
+
+    // console.log(`scroll.y = ${scroll.y}`)
+    // console.log(`top = ${rect.top}`)
 
     this.updateSize();
     this.updatePosition();
@@ -73,9 +77,13 @@ export default class extends component(Object3D) {
     this.updatePosition();
   }
 
-
   onScroll() {
     this.updatePosition();
+  }
+
+  onTransitionAfter() {
+    document.dispatchEvent(new Event("scroll"))
+    window.dispatchEvent(new Event("resize"))
   }
 
   destroy() {

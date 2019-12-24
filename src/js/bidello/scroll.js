@@ -45,11 +45,6 @@ export class Scroll {
         this.ease = 0;
 
         this.scroll.on("scroll", this.onScroll);
-
-        bidello.trigger({ name: "scroll" }, {
-            x: this.x,
-            y: this.y,
-        })
     }
 
     update() {

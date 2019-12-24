@@ -3,6 +3,8 @@ precision mediump float;
 attribute vec3 normal;
 attribute vec3 position;
 
+varying vec3 vPosition;
+
 uniform mat4 modelMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 modelViewMatrix;
@@ -19,4 +21,6 @@ void main() {
   // pos.y += sin(pos.x + uTime * 50.) * 0.075;
 
   gl_Position = projectionMatrix * viewMatrix * pos;
+
+  vPosition = position;
 }

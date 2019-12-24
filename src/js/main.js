@@ -14,8 +14,6 @@ import TransitionManager from './transitionManager';
 
 class Site extends component() {
   init() {
-    this.app = Application.start();
-
     assets.load();
 
     document.body.appendChild(renderer.domElement);
@@ -26,7 +24,12 @@ class Site extends component() {
     // postfx.render(scene, camera);
   }
 
+  onTransitionAFter() {
+    this.app.unload("trackable");
+  }
+
   onLoadEnd() {
+    this.app = Application.start();
     this.app.register("trackable", trackable);
     this.transitionManager = new TransitionManager();
 

@@ -2,7 +2,7 @@ import { Loader } from 'resource-loader';
 import bidello from 'bidello';
 import deferred from '/js/utils/deferred';
 
-import textures from '/js/gl/utils/textures';
+import textures from './gl/utils/textures';
 
 const RESOURCES = [
   {
@@ -66,9 +66,8 @@ class Assets {
   }
 
   use(resource, next) {
-    textures.loadTexture({ resource });
-
-    next();
+    console.log(resource)
+    textures.loadTexture({ resource }, next);
   }
 
   onProgress(loader, meta) {
