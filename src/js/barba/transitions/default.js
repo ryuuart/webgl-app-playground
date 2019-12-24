@@ -8,7 +8,7 @@ import scene from '../../scene';
 export default {
     name: 'default-transition',
 
-    sync: true,
+    sync: false,
 
     // from: {
     //     namespace: [],
@@ -30,8 +30,8 @@ export default {
         console.log(namespace)
 
         gsap.fromTo(container, 1, { opacity: 0 }, { opacity: 1, onComplete: () => {
-
+            document.dispatchEvent(new Event("scroll"))
+            window.dispatchEvent(new Event("resize"))
         }});
-
     },
 };
