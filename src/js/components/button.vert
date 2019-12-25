@@ -16,7 +16,7 @@ void main() {
   vec2 uv = ((clipSpace.xy / clipSpace.w) + 1.0) / 2.0;
   vec4 pos = modelMatrix * vec4(position, 1.0);
 
-  // pos.y += sin(pos.x + uTime * 50.) * 0.075;
+  pos.y += sin(pos.x + uTime * 50.) * 0.075;
 
   gl_Position = projectionMatrix * viewMatrix * pos;
 }

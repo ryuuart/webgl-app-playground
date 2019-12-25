@@ -14,14 +14,6 @@ class TransitionManager extends component() {
     init() {
         barba.use(barbaPrefetch);
 
-        barba.hooks.before((data) => {
-            scroll.destroy();
-        })
-        
-        barba.hooks.beforeEnter((data) => {
-            scroll.init();
-        });
-
         barba.hooks.after((data) => {
             console.log("after barba hook")
             document.dispatchEvent(new Event("scroll"))
@@ -31,6 +23,7 @@ class TransitionManager extends component() {
         this.barba = barba.init({
             debug: true,
             transitions: [defaultTransition],
+            views: [home, blog]
         })
 
         console.log("Transition Manager loaded");
