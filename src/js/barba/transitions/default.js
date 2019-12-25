@@ -27,19 +27,25 @@ export default {
             uProgresses.push(uniforms.uProgress);
         }
 
-        gsap.to(uProgresses, 0.5, { value: 1 })
-
+        
         gsap.fromTo(container, 0.5, { autoAlpha: 1 }, { autoAlpha: 0 }).then(() => {
             container.style.display = "none";
             done();
         });
+        
+        gsap.to(uProgresses, 0.5, { value: 1 })
+    },
+    beforeEnter({ next }) {
+        const { container, namespace } = next;
+
+        container.style.opacity = '0';
     },
     after({ next }) {
         const done = this.async();
         const { container, namespace } = next;
         
         console.log(namespace)
-
+        
         const uProgresses = [];
         for (const gl in dom.instances) {
             const uniforms = dom.instances[gl].material.uniforms;
@@ -47,8 +53,6 @@ export default {
         }
 
         gsap.fromTo(container, 0.5, { autoAlpha: 0 }, { autoAlpha: 1 }).then(() => {
-            console.log("enter default")
-
             done();
         });
 

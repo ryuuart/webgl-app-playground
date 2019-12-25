@@ -63,7 +63,7 @@
       display: inline-block;
 
       padding: 0.75rem 1rem;
-      margin-right: 0.5rem;
+      margin-right: 0.75rem .5rem;
     }
 
     .block {
@@ -142,8 +142,13 @@
     .preload__text {
       font-family: sans-serif;
       font-weight: 900;
-      font-size: 25rem;
+      font-size: 8rem;
+    }
 
+    @media screen and (max-width: 600px) {
+      .preload__text {
+        font-size: 6rem;
+      }
     }
 
     .preload__done {
@@ -164,8 +169,8 @@
       margin-bottom: 6rem;
     }
 
-    main {
-      min-height: 100vh;
+    .dg.ac {
+      z-index: 9999 !important;
     }
   </style>
 </head>
