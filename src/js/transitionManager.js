@@ -13,19 +13,25 @@ import { home, blog } from './barba/views';
 class TransitionManager extends component() {
     init() {
         barba.use(barbaPrefetch);
+
+        barba.hooks.before((data) => {
+            scroll.destroy();
+        })
         
+        barba.hooks.beforeEnter((data) => {
+            scroll.init();
+        });
+
+        barba.hooks.after((data) => {
+            console.log("after barba hook")
+            document.dispatchEvent(new Event("scroll"))
+            window.dispatchEvent(new Event("resize"))
+        });
+
         this.barba = barba.init({
             debug: true,
             transitions: [defaultTransition],
         })
-
-        barba.hooks.before(() => {
-            scroll.destroy();
-        })
-
-        barba.hooks.after((data) => {
-            scroll.init();
-        });
 
         console.log("Transition Manager loaded");
     }

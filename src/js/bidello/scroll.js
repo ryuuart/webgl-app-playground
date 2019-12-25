@@ -27,10 +27,10 @@ export class Scroll {
         this.scroll.destroy();
     }
 
-    init() {
+    init(container = document.getElementById("js-scroll")) {
         this.scroll.destroy();
         
-        this.scrollContainer = document.getElementById("js-scroll");
+        this.scrollContainer = container;
 
         this.scroll = new LocomotiveScroll({
             el: this.scrollContainer,

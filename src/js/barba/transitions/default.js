@@ -16,37 +16,42 @@ export default {
     //     namespace: [],
     // },
     leave({ current }) {
+        const done = this.async();
         const { container, namespace } = current;
 
         console.log(namespace);
 
+        const uProgresses = [];
         for (const gl in dom.instances) {
             const uniforms = dom.instances[gl].material.uniforms;
-
-            gsap.to(uniforms.uProgress, 0.5, { value: 1 });
-            console.log(uniforms.uProgress)
+            uProgresses.push(uniforms.uProgress);
         }
 
+        gsap.to(uProgresses, 0.5, { value: 1 })
+
         gsap.fromTo(container, 0.5, { autoAlpha: 1 }, { autoAlpha: 0 }).then(() => {
-            document.dispatchEvent(new Event("scroll"))
-            window.dispatchEvent(new Event("resize"))
-            this.async();
+            container.style.display = "none";
+            done();
         });
     },
-    enter({ next }) {
+    after({ next }) {
+        const done = this.async();
         const { container, namespace } = next;
         
         console.log(namespace)
 
+        const uProgresses = [];
         for (const gl in dom.instances) {
             const uniforms = dom.instances[gl].material.uniforms;
-
-            gsap.to(uniforms.uProgress, 0.5, { value: 0 });
-            console.log(uniforms.uProgress)
+            uProgresses.push(uniforms.uProgress);
         }
 
         gsap.fromTo(container, 0.5, { autoAlpha: 0 }, { autoAlpha: 1 }).then(() => {
-            this.async();
+            console.log("enter default")
+
+            done();
         });
+
+        gsap.to(uProgresses, 0.5, { value: 0 })
     },
 };
