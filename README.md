@@ -26,6 +26,14 @@ npm run dev
 
 ## 📝 Notes
 
+### 12/25/2019
+
+#### Transitions and Async
+
+#### The pipeline
+
+#### Wrapping the app together
+
 ### 12/18/2019
 
 #### TextureLoader
