@@ -1,5 +1,6 @@
 import barba from '@barba/core';
 import barbaPrefetch from '@barba/prefetch';
+
 import site from './main';
 import { scroll, viewport, raf } from './bidello';
 import bidello, { component } from 'bidello';
@@ -11,6 +12,7 @@ import defaultTransition from './barba/transitions/default';
 import { home, blog } from './barba/views';
 
 class TransitionManager extends component() {
+    
     init() {
         barba.use(barbaPrefetch);
 

@@ -9,12 +9,6 @@ import dom from '../../gl/dom';
 export default {
     name: 'default-transition',
 
-    // from: {
-    //     namespace: [],
-    // },
-    // to: {
-    //     namespace: [],
-    // },
     leave({ current }) {
         const done = this.async();
         const { container, namespace } = current;

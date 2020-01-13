@@ -34,6 +34,7 @@
   "dependencies": {
     "@barba/core": "^2.9.6",
     "@barba/prefetch": "^2.1.10",
+    "@barba/router": "^2.1.10",
     "gl": "^4.4.0",
     "gsap": "^3.0.4",
     "kapla": "^2.1.3",

@@ -45,8 +45,9 @@ class Pointer {
   }
 
   convertEvent(e) {
-    e.preventDefault();
-    e.stopPropagation();
+    // Renable these when you want to customize default interactions
+    // e.preventDefault();
+    // e.stopPropagation();
 
     const t = {
       x: 0,
