@@ -13,7 +13,6 @@ export default class extends component(Object3D) {
       return;
     }
 
-    scroll.update();
     const rect = this.element.getBoundingClientRect();
 
     this.bounds = {

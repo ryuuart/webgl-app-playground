@@ -2,7 +2,7 @@ import barba from '@barba/core';
 import barbaPrefetch from '@barba/prefetch';
 
 import site from './main';
-import { scroll, viewport, raf } from './bidello';
+import { scroll, viewport, raf, Scroll } from './bidello';
 import bidello, { component } from 'bidello';
 
 import trackable from './kapla/Trackable';
@@ -15,6 +15,14 @@ class TransitionManager extends component() {
     
     init() {
         barba.use(barbaPrefetch);
+
+        barba.hooks.after((data) => {
+            scroll.init();
+        })
+
+        barba.hooks.afterLeave((data) => {
+            scroll.destroy();
+        })
 
         this.barba = barba.init({
             debug: true,

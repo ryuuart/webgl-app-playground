@@ -1,16 +1,21 @@
 import LocomotiveScroll from 'locomotive-scroll';
+import Smooth from 'smooth-scrolling';
 
 import bidello from 'bidello';
+import { smoothMax } from 'math-toolbox';
 
 export class Scroll {
     constructor() {
         this.scrollContainer = document.getElementById("js-scroll");
+        
+        this.onScroll = this.onScroll.bind(this);
 
-        this.scroll = new LocomotiveScroll({
-            el: this.scrollContainer,
-            smooth: true,
-            inertia: 0.5,
-            smoothMobile: true,
+        this.scroll = new Smooth({
+            preload: true,
+           section: this.scrollContainer,
+           callback: this.onScroll,
+           noscrollbar: true
+        //    divs: this.scrollContainer.children
         });
 
         this.scrollObj = {};
@@ -18,9 +23,7 @@ export class Scroll {
         this.y = 0;
         this.ease = 0;
 
-        this.onScroll = this.onScroll.bind(this);
-
-        this.scroll.on("scroll", this.onScroll);
+        console.log(this.scroll)
     }
 
     destroy() {
@@ -28,34 +31,42 @@ export class Scroll {
     }
 
     init(container = document.getElementById("js-scroll")) {
-        this.scroll.destroy();
+        this.destroy();
         
-        this.scrollContainer = container;
-
-        this.scroll = new LocomotiveScroll({
-            el: this.scrollContainer,
-            smooth: true,
-            inertia: 0.5,
-            smoothMobile: true,
-        });
-
         this.scrollObj = {};
         this.x = 0;
         this.y = 0;
         this.ease = 0;
 
-        this.scroll.on("scroll", this.onScroll);
+        this.scrollContainer = container;
+
+        this.onScroll = this.onScroll.bind(this);
+
+        this.scroll = new Smooth({
+            preload: true,
+           section: this.scrollContainer,
+           callback: this.onScroll,
+           noscrollbar: true,
+           divs: this.scrollContainer.children
+        });
+
+        this.scroll.init();
     }
 
-    update() {
-        this.scroll.update();
-    }
+    // onScroll({ scroll }) {
+    //     this.scroll.update();
 
-    onScroll({ scroll }) {
-        this.scroll.update();
+    //     this.x = scroll.x;
+    //     this.y = scroll.y;
 
-        this.x = scroll.x;
-        this.y = scroll.y;
+    //     bidello.trigger({ name: "scroll" }, {
+    //         x: this.x,
+    //         y: this.y,
+    //     })
+    // }
+    onScroll(val) {
+        this.x = window.scrollX || window.pageXOffset;
+        this.y = (val || this.y);
 
         bidello.trigger({ name: "scroll" }, {
             x: this.x,

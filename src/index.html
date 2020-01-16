@@ -3,6 +3,7 @@
 <head>
   <title>antipasto</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/locomotive-scroll.min.css">
   <style>
     * {
       box-sizing: border-box;
@@ -94,13 +95,6 @@
 
     .c-scrollbar {
       width: 10px;
-      position: absolute;
-      right: 0;
-      top: 0;
-      height: 100vh;
-      transform-origin: center right;
-      transform: scaleX(1);
-      transition: transform 0.2s linear;
 
       color: white;
 
@@ -109,18 +103,8 @@
       opacity: 1;
     }
 
-    .c-scrollbar:hover {
-      transform: scaleX(1.2);
-    }
-
     .c-scrollbar_thumb {
-      color: white;
       background: white;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-
       opacity: 0.25;
     }
 
@@ -171,6 +155,10 @@
 
     .dg.ac {
       z-index: 9999 !important;
+    }
+
+    main {
+      min-height: 100vh;
     }
   </style>
 </head>
