@@ -14,16 +14,15 @@ export class Scroll {
             preload: true,
            section: this.scrollContainer,
            callback: this.onScroll,
-           noscrollbar: true
-        //    divs: this.scrollContainer.children
+           divs: this.scrollContainer.children
         });
+
+        this.scroll.init();
 
         this.scrollObj = {};
         this.x = 0;
         this.y = 0;
         this.ease = 0;
-
-        console.log(this.scroll)
     }
 
     destroy() {
@@ -31,8 +30,6 @@ export class Scroll {
     }
 
     init(container = document.getElementById("js-scroll")) {
-        this.destroy();
-        
         this.scrollObj = {};
         this.x = 0;
         this.y = 0;
@@ -46,7 +43,6 @@ export class Scroll {
             preload: true,
            section: this.scrollContainer,
            callback: this.onScroll,
-           noscrollbar: true,
            divs: this.scrollContainer.children
         });
 

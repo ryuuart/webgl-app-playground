@@ -157,9 +157,42 @@
       z-index: 9999 !important;
     }
 
-    main {
-      min-height: 100vh;
-    }
+    .vs-scrollbar {
+  display: block;
+  position: absolute;
+  transition: transform .6s;
+}
+
+.vs-scrollbar.vs-vertical {
+  top: 0; right: -5px; bottom: 0;
+  width: 15px; height: 100%;
+  transform: translate3d(5px,0,0);
+}
+
+
+.is-dragging .vs-scrollbar.vs-horizontal,
+.is-dragging .vs-scrollbar.vs-vertical,
+.vs-scrollbar.vs-horizontal:hover,
+.vs-scrollbar.vs-vertical:hover {
+  transform: none;
+}
+
+.vs-scrollbar .vs-scrolldrag {
+  width: 100%;
+  height: auto;
+  background: #ccc;
+  cursor: pointer;
+}
+
+.vs-scroll-view {
+  position: relative;
+  width: 1px;
+}
+
+main {
+  min-height: 100vh;
+}
+
   </style>
 </head>
 
